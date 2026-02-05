@@ -7,7 +7,7 @@ Développer un agent autonome capable de rédiger un rapport de stage structuré
 
 ### Phase 1 : Initialisation
 - [x] Initialiser le dépôt Github.
-- [ ] Créer l'environnement virtuel et installer les dépendances.
+- [x] Créer l'environnement virtuel et installer les dépendances.
 - [x] Envoyer le mail d'initialisation avec l'URL du repo.
 - [x] Configurer le fichier `roadmap.md` (ce fichier).
 
