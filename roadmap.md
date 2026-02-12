@@ -12,12 +12,12 @@ Développer un agent autonome capable de rédiger un rapport de stage structuré
 - [x] Configurer le fichier `roadmap.md` (ce fichier).
 
 ### Phase 2 : Architecture du Graphe (LangGraph)
-- [ ] Définir l'état du graphe pour suivre l'avancement du rapport.
-- [ ] Implémenter les nœuds :
+- [x] Définir l'état du graphe pour suivre l'avancement du rapport.
+- [x] Implémenter les nœuds :
     - `researcher` : Cherche des infos (ChromaDB d'abord, Tavily en secours).
     - `writer` : Rédige ou met à jour une section en Markdown.
     - `human_review` : Point d'arrêt pour la validation journalière.
-- [ ] Configurer les arêtes avec la logique de boucle pour la reformulation.
+- [x] Configurer les arêtes avec la logique de boucle pour la reformulation.
 
 ### Phase 3 : Intelligence & RAG
 - [ ] Configurer **ChromaDB** pour stocker les données de l'entreprise et les notes de stage.
