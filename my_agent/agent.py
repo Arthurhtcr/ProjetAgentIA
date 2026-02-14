@@ -1,5 +1,6 @@
 from langgraph.graph import StateGraph, START, END, MessagesState
-from utils.nodes import researcher, writer, human_review
+from langgraph.prebuilt import tools_condition
+from utils.nodes import researcher, writer, human_review, tool_node
 
 
 
@@ -12,11 +13,20 @@ def decide_to_continue(state: MessagesState):
 workflow = StateGraph(MessagesState)
 
 workflow.add_node("researcher", researcher)
+workflow.add_node("tools", tool_node)
 workflow.add_node("writer", writer)
 workflow.add_node("human_review", human_review)
 
 workflow.add_edge(START, "researcher")
-workflow.add_edge("researcher", "writer")
+workflow.add_conditional_edges(
+    "researcher",
+    tools_condition, 
+    {
+        "tools": "tools",
+        "__end__": "writer"
+    }
+)
+workflow.add_edge("tools", "researcher")
 workflow.add_edge("writer", "human_review")
 
 # Logique de décision : validation ou retour au writer

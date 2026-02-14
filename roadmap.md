@@ -20,9 +20,9 @@ Développer un agent autonome capable de rédiger un rapport de stage structuré
 - [x] Configurer les arêtes avec la logique de boucle pour la reformulation.
 
 ### Phase 3 : Intelligence & RAG
-- [ ] Configurer **ChromaDB** pour stocker les données de l'entreprise et les notes de stage.
-- [ ] Intégrer l'outil de recherche **Tavily**.
-- [ ] Développer les prompts système pour garantir le ton et la structure du rapport.
+- [x] Configurer **ChromaDB** pour stocker les données de l'entreprise et les notes de stage.
+- [x] Intégrer l'outil de recherche **Tavily**.
+- [x] Développer les prompts système pour garantir le ton et la structure du rapport.
 
 ### Phase 4 : Persistance & Interaction
 - [ ] Implémenter un `Checkpointer` pour permettre d'arrêter et reprendre le workflow.

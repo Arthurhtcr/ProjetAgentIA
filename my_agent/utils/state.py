@@ -1,9 +1,8 @@
-from typing import TypedDict, List
-
+from typing import TypedDict, Annotated, List
+from langgraph.graph.message import add_messages
 
 class AgentState(TypedDict):
+    messages: Annotated[list, add_messages]
     report_content: str
     current_section: str
-    research_data: List[str]
-    user_feedback: str
     is_validated: bool
