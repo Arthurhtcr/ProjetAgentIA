@@ -28,10 +28,15 @@ llm_with_tools = llm.bind_tools([recherche_rapport])
 
 def researcher(state: AgentState):
     print("--- NOEUD RESEARCHER ---")
-    sys_msg = SystemMessage(content="Tu es un assistant de recherche. Utilise l'outil de recherche pour répondre aux questions sur le stage.")
-    response = llm_with_tools.invoke([sys_msg] + state["messages"])
+    sys_msg = SystemMessage(content="""Tu es un assistant de recherche. 
+    Ta mission est d'extraire les informations pour UNE SEULE SEMAINE de stage à la fois.
+    Regarde l'historique : si aucune semaine n'est rédigée, cherche la Semaine 1. 
+    Si la Semaine 1 existe, cherche la Semaine 2. 
+    NE CHERCHE PAS TOUT LE STAGE D'UN COUP.""")
     
+    response = llm_with_tools.invoke([sys_msg] + state["messages"])
     return {"messages": [response]}
+    
 # --- NOEUD WRITER ---
 def writer(state: MessagesState):
     print("--- RÉDACTION ---")
@@ -50,6 +55,10 @@ def writer(state: MessagesState):
 
     Si les sources mentionnent des éléments de l'entreprise, intègre-les avec précision.
     Ajoutes les sources utilisées à la fin de la section, sous une rubrique "Sources" formatée en Markdown.
+
+    RÈGLE CRUCIALE : Ne rédige qu'UNE SEULE SEMAINE à la fois. 
+    Si tu reçois des informations sur plusieurs semaines, choisis la suivante dans l'ordre chronologique.
+    Arrête-toi après avoir rédigé une semaine.
     """
     response = llm.invoke([
         SystemMessage(content=system_prompt),
@@ -61,4 +70,21 @@ def writer(state: MessagesState):
 # --- NOEUD HUMAN REVIEW ---
 def human_review(state: MessagesState):
     print("--- ATTENTE DE VALIDATION HUMAINE ---")
-    return state
+    return {}
+
+
+def saver(state: MessagesState):
+    print("--- EXPORT DANS LE FICHIER ---")
+    
+    report_text = ""
+    for m in reversed(state["messages"]):
+        if m.type == "ai" and not m.tool_calls:
+            report_text = m.content
+            break
+
+    with open("rapport_final.md", "a", encoding="utf-8") as f:
+        f.write("\n\n") 
+        f.write(report_text)
+        f.write("\n\n---")
+        
+    return {"messages": [SystemMessage(content="Semaine ajoutée au fichier.")]}

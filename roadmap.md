@@ -25,9 +25,9 @@ Développer un agent autonome capable de rédiger un rapport de stage structuré
 - [x] Développer les prompts système pour garantir le ton et la structure du rapport.
 
 ### Phase 4 : Persistance & Interaction
-- [ ] Implémenter un `Checkpointer` pour permettre d'arrêter et reprendre le workflow.
-- [ ] Créer l'interface d'interaction pour la validation humaine.
-- [ ] Gérer l'export automatique vers le fichier final `rapport_final.md`.
+- [x] Implémenter un `Checkpointer` pour permettre d'arrêter et reprendre le workflow.
+- [x] Créer l'interface d'interaction pour la validation humaine.
+- [x] Gérer l'export automatique vers le fichier final `rapport_final.md`.
 
 ### Phase 5 : Bonus & Finalisation
 - [ ] Implémenter une couche de détection de Prompt Injection.
